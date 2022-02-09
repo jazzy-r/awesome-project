@@ -6,7 +6,7 @@ metadata:
 spec:
   chart:
     spec:
-      version: 0.13.12
+      version: 0.13.17
   valuesFrom:
     - kind: ConfigMap
       name: staging-values
