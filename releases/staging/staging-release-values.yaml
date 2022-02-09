@@ -3,20 +3,10 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: dagster
-  # namespace: production
 spec:
   chart:
     spec:
-      version: 0.13.15
-  values:
-    dagster-user-deployments:
-      deployments:
-        - name: "k8s-example-user-code-1"
-          image:
-            repository: "docker.io/dagster/user-code-example"
-            tag: 0.13.15
-            pullPolicy: Always
-          dagsterApiGrpcArgs:
-            - "--python-file"
-            - "/example_project/example_repo/repo.py"
-          port: 3030
+      version: 0.13.12
+  valuesFrom:
+    - kind: ConfigMap
+      name: staging-values
