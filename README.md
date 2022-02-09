@@ -106,6 +106,7 @@ flux get all
 
 ### Check gitrepositories in K9s
 
+```
 flux create kustomization awesome-project-production \
     --target-namespace=production \
     --source=awesome-project-production \
@@ -113,7 +114,8 @@ flux create kustomization awesome-project-production \
     --prune=true \
     --interval=1m \
     --export > ./production-kustomization.yaml
-
+```
+```
 flux create kustomization awesome-project-staging \
     --target-namespace=staging \
     --source=awesome-project-staging \
@@ -121,7 +123,43 @@ flux create kustomization awesome-project-staging \
     --prune=true \
     --interval=1m \
     --export > ./staging-kustomization.yaml
-
+```
 ### Commit these two files
 
 ### Check Kustomizations in K9s
+
+# Update the staging Kustomizations
+
+```
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: staging-helm
+  namespace: flux-system
+spec:
+  interval: 1m0s
+  path: ./helm
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: awesome-project-staging
+  targetNamespace: staging
+
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: awesome-project-staging
+  namespace: flux-system
+spec:
+  interval: 1m0s
+  path: ./releases/staging
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: awesome-project-staging
+  targetNamespace: staging
+  dependsOn:
+    - name: staging-helm
+```
