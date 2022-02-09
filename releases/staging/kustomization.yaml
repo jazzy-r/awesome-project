@@ -13,3 +13,6 @@ configMapGenerator:
 
 configurations:
   - kustomizeconfig.yaml
+
+patchesStrategicMerge:
+  - staging-release-values.yaml
