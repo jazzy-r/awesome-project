@@ -26,7 +26,7 @@ brew install derailed/k9s/k9s
 
 ## Fork this repository
 
-https://github.com/jazzy-r/awesome-project.git
+- https://github.com/jazzy-r/awesome-project.git
 
 # Set GitHub Tokens #
 
