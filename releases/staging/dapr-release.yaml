@@ -12,4 +12,4 @@ spec:
         name: dapr
       version: 1.6
   interval: 1m0s
-  targetNamespace: dapr-system
+  # targetNamespace: dapr-system
